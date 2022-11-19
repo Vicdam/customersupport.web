@@ -18,7 +18,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14-alpine]
+        node-version: [14.x]
 
     steps:
     - name: Checkout repository
@@ -72,52 +72,52 @@ jobs:
 
 
   
-  build_and_push_to_registry_backend:
+  # build_and_push_to_registry_backend:
 
-    name: Build and push Docker image to Docker Hub back
-    if: github.event.pull_request.merged == true
+  #   name: Build and push Docker image to Docker Hub back
+  #   if: github.event.pull_request.merged == true
 
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend    
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: ./backend    
 
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
+  #   steps:
+  #     - name: Check out the repo
+  #       uses: actions/checkout@v3
       
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}          
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  #     - name: Log in to Docker Hub
+  #       uses: docker/login-action@v2
+  #       with:
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}          
+  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
             
-      - name: Get Current Date 
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
+  #     - name: Get Current Date 
+  #       id: date
+  #       run: echo "::set-output name=date::$(date +'%Y-%m-%d--%M-%S')"
 
-      - name: Build Docker Image
-        run: docker build . --file Dockerfile --tag $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
+  #     - name: Build Docker Image
+  #       run: docker build . --file Dockerfile --tag $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
         
-      - name: Push Docker Image to Docker Hub
-        run: docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
+  #     - name: Push Docker Image to Docker Hub
+  #       run: docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
 
-  Deploy: 
-    runs-on: ubuntu-latest
+  # Deploy: 
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@master
+  #   steps:
+  #     - name: Checkout master
+  #       uses: actions/checkout@master
 
-      - name: Pull from GitHub
-        uses: appleboy/ssh-action@master
+  #     - name: Pull from GitHub
+  #       uses: appleboy/ssh-action@master
 
-        with:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.KEY }}
-          script: |
-            docker-compose up -d .             
+  #       with:
+  #         HOST: ${{ secrets.HOST }}
+  #         USERNAME: ${{ secrets.USERNAME }}
+  #         KEY: ${{ secrets.KEY }}
+  #         script: |
+  #           docker-compose up -d .             
 
 
         

@@ -1,5 +1,5 @@
 # pull the official base image
-FROM node:current-alpine as build
+FROM node:14-alpine as build
 
 # set work directory
 WORKDIR /scrybe_frontend
