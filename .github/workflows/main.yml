@@ -32,7 +32,13 @@ jobs:
       run: npm install
 
     - name: Run the tests
-      run: npm run lint
+      run: npm ci
+      
+    - name: Build
+      run: npm run build --if-present
+      
+    - name: test
+      run: npm test
   
   build_and_push_to_registry:
 
@@ -68,7 +74,7 @@ jobs:
   
   build_and_push_to_registry_backend:
 
-    name: Build and push Docker image to Docker Hub
+    name: Build and push Docker image to Docker Hub back
     if: github.event.pull_request.merged == true
 
     runs-on: ubuntu-latest
