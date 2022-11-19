@@ -13,10 +13,10 @@ COPY . .
 
 EXPOSE 3000
 
-RUN npm run build
+# RUN npm run build
 
-FROM nginx:1.19
+# FROM nginx:1.19
 
-COPY ./nginx/nginx.conf etc/nginx/nginx.conf
+# COPY ./nginx/nginx.conf etc/nginx/nginx.conf
 
-COPY --from=build /scrybe_frontend/dist /usr/share/nginx/html
+# COPY --from=build /scrybe_frontend/dist /usr/share/nginx/html
