@@ -57,14 +57,14 @@ jobs:
 
       - name: Build, Tag and Push Frontend Image
         run: |
-          docker build -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME:${{ steps.date.outputs.date }} .
-          docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME:${{ steps.date.outputs.date }}
+          docker build -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME:latest .
+          docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME:latest
         
-      - name: Build, Tag and Push Backend Image
-        run: |
-          cd ../backend/app
-          docker build -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }} .
-          docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
+      # - name: Build, Tag and Push Backend Image
+      #   run: |
+      #     cd ../backend/app
+      #     docker build -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }} .
+      #     docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
 
   
   # Deploy:
