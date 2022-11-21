@@ -20,6 +20,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         tags: "latest,another"
       
-      run: |
+        run: |
           docker build -t vicdam/scrybefrontend .
           docker push vicdam/scrybefrontend
