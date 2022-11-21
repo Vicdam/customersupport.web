@@ -1,5 +1,11 @@
 name: Publish Docker
-on: [push]
+
+on:
+  push:
+    branches: [ "main" ]
+  
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -20,6 +26,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         tags: "latest,another"
       
-        run: |
-          docker build -t vicdam/scrybefrontend .
-          docker push vicdam/scrybefrontend
+      run: |
+        docker build -t vicdam/scrybefrontend .
+        docker push vicdam/scrybefrontend
