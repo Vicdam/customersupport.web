@@ -6,18 +6,19 @@ on:
   
   workflow_dispatch:
 
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
 
+  build:
+
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./scrybe_frontend
 
     steps:
-    - uses: actions/checkout@v3
     - name: Publish to Registry
+      uses: actions/checkout@v3
+
 
     - uses: elgohr/Publish-Docker-Github-Action@v4
       with:
@@ -25,7 +26,7 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
         tags: "latest,another"
-        
+
     - name: push
       run: |
         docker build -t vicdam/scrybefrontend .
