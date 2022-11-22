@@ -60,13 +60,13 @@ jobs:
           docker build . --file Dockerfile -t vicdam/scrybefrontend:${{ steps.date.outputs.date }}
           docker push vicdam/scrybefrontend:${{ steps.date.outputs.date }}
         
-      # - name: Build, Tag and Push Backend Image
-      #   run: |
-      #     cd ../backend/app
-      #     docker build -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }} .
-      #     docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
+      - name: Build, Tag and Push Backend Image
+        run: |
+          cd ../backend/app
+          docker build . --file Dockerfile -t $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
+          docker push $DOCKERHUB_USERNAME/$REPOSITORY_NAME_BACKEND:${{ steps.date.outputs.date }}
 
-  
+
   # Deploy:
   #   needs: [ build_and_push_to_registry ]
   #   runs-on: ubuntu-latest
