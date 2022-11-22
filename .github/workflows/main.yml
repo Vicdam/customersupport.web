@@ -57,7 +57,7 @@ jobs:
 
       - name: Build, Tag and Push Frontend Image
         run: |
-          docker build -t vicdam/scrybefrontend:${{ steps.date.outputs.date }}
+          docker build . --file Dockerfile -t vicdam/scrybefrontend:${{ steps.date.outputs.date }}
           docker push vicdam/scrybefrontend:${{ steps.date.outputs.date }}
         
       # - name: Build, Tag and Push Backend Image
