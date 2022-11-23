@@ -6,14 +6,14 @@ WORKDIR /scrybe_frontend
 
 # install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm install --force
 
 # copy project
 COPY . .
 
 EXPOSE 3000
 
-# RUN npm run build
+RUN npm run dev
 
 # FROM nginx:1.19
 
